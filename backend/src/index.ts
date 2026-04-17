@@ -4,10 +4,19 @@ import categories from './routes/categories.js'
 import nodes from './routes/nodes.js'
 
 const app = express()
+const allowedOrigins = (process.env.CORS_ORIGIN ?? 'http://localhost:3000')
+  .split(',')
+  .map((value) => value.trim())
+  .filter(Boolean)
 
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN?.split(',').map((v) => v.trim()) ?? '*'
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true)
+      }
+      return callback(new Error('CORS origin denied'))
+    }
   })
 )
 app.use(express.json({ limit: '1mb' }))

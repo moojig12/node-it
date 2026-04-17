@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { Prisma } from '@prisma/client'
 import { prisma } from '../lib/prisma.js'
 import { createCategorySchema, createNodeSchema } from '../lib/validators.js'
 
@@ -165,7 +166,12 @@ router.post('/:id/nodes', async (req, res) => {
       categoryId: req.params.id,
       parentId: parsed.data.parentId ?? null,
       values: {
-        create: parsed.data.values
+        createMany: {
+          data: parsed.data.values.map((value) => ({
+            fieldId: value.fieldId,
+            value: value.value === null ? Prisma.JsonNull : (value.value as Prisma.InputJsonValue)
+          }))
+        }
       }
     },
     include: {
