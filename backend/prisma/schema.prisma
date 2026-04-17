@@ -1,0 +1,42 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String
+  fields    Field[]
+  nodes     Node[]
+  createdAt DateTime @default(now())
+}
+
+model Field {
+  id         String   @id @default(uuid())
+  name       String
+  type       String
+  required   Boolean  @default(false)
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+}
+
+model Node {
+  id         String      @id @default(uuid())
+  category   Category    @relation(fields: [categoryId], references: [id])
+  categoryId String
+  parentId   String?
+  collapsed  Boolean     @default(false)
+  values     NodeValue[]
+}
+
+model NodeValue {
+  id      String @id @default(uuid())
+  node    Node   @relation(fields: [nodeId], references: [id])
+  nodeId  String
+  fieldId String
+  value   Json
+}
