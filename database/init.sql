@@ -1,2 +1,0 @@
--- Optional SQL bootstrap file.
--- PostgreSQL database is initialized via docker-compose environment variables.
