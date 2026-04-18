@@ -19,7 +19,7 @@ services:
     ports:
       - "4000:4000"
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/node_notes
+      DATABASE_URL: "postgresql://postgres:postgres@db:5432/node_notes?schema=public"
     depends_on:
       - db
     volumes:
