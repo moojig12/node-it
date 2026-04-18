@@ -98,8 +98,10 @@ It behaves like a **lightweight personal database builder**, but with a UI desig
 This is ideal for people who:
 
 - Think in systems, not lists
+- Want a simple yet versatile noting app
 - Prefer structure but dislike rigid tools
 - Want something between Notion, Airtable, and graph editors
+- People making procuring products who want to save time
 - Build mental models instead of just storing notes
 
 ---
