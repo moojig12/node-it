@@ -10,7 +10,7 @@ It’s closer to building a **personal information model** than taking tradition
 
 ## What it feels like to use
 
-You don’t “write notes” here in the usual sense.
+Quick input for notes with fields formatted by you in each category. Efficient noting and tracking of values
 
 You:
 
