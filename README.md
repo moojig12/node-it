@@ -17,6 +17,7 @@ You:
 - Define a **category** (like “Expenses”, “Ideas”, “Tasks”, “Research”)
 - Decide what each entry should contain (text, numbers, dates, currency, etc.)
 - Then start creating **nodes instantly**, filling them in as fast as you think
+- Adding notes with the same ID/Name will add up the configured value fields (entering [2x] [Bread] [5$] twice will result in [4x] [Bread] [5$] in the category for example)
 
 Everything is editable in place. No navigation-heavy workflows. No constant page switching. Just structured input that stays out of your way.
 
