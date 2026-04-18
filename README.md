@@ -52,8 +52,8 @@ Each entry follows its category, but remains flexible and editable.
 Nodes can also contain other nodes, forming natural hierarchies:
 
 - project
-  - tasks
-    - subtasks
+  - category
+    - categories
       - notes
 
 ---
