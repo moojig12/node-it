@@ -1,7 +1,4 @@
 :80 {
-
-    reverse_proxy /api/* backend_nodejs:8080
-    reverse_proxy /socket.io/* backend_nodejs:8080
-
+    reverse_proxy /api/* backend:8080
     reverse_proxy frontend:3000
 }
