@@ -1,23 +1,27 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom';
+import Toasts from './Toasts.jsx';
 
 function Layout() {
   return (
     <div className="app-shell">
       <header className="app-header">
-        <div className="app-brand">
+        <NavLink to="/" className="app-brand" end>
           <span className="brand-dot" aria-hidden="true" />
           <span>Node It</span>
-        </div>
+        </NavLink>
         <nav className="app-nav">
-          <NavLink to="/" end>Home</NavLink>
-          <NavLink to="/explorer">Explorer</NavLink>
+          <NavLink to="/" end>
+            Home
+          </NavLink>
+          <NavLink to="/categories">Categories</NavLink>
         </nav>
       </header>
       <main className="app-main">
         <Outlet />
       </main>
+      <Toasts />
     </div>
-  )
+  );
 }
 
-export default Layout
+export default Layout;

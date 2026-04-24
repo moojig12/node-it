@@ -1,20 +1,20 @@
-/* Node It design tokens — orange-tinted yellow brand, minimal light-first palette. */
+/* Node It design tokens — red & white brand, minimal light-first palette. */
 
 :root {
-  /* Brand — warm amber / honey */
-  --brand: #f5a524;
-  --brand-hover: #e4930a;
-  --brand-active: #b87400;
-  --brand-soft: #fff4d6;
-  --brand-soft-border: #f5d98a;
-  --brand-fg: #1a1300;
+  /* Brand — crimson red on white */
+  --brand: #dc2626;
+  --brand-hover: #b91c1c;
+  --brand-active: #991b1b;
+  --brand-soft: #fef2f2;
+  --brand-soft-border: #fecaca;
+  --brand-fg: #ffffff;
 
-  /* Neutrals — slightly warm, keep contrast calm */
-  --bg: #fefdfb;
+  /* Neutrals — cool, near-white surfaces to let the red pop */
+  --bg: #ffffff;
   --surface: #ffffff;
-  --surface-alt: #faf8f3;
-  --border: #ebe8e0;
-  --border-strong: #d9d5c9;
+  --surface-alt: #f7f7f8;
+  --border: #e5e5e7;
+  --border-strong: #d1d1d4;
 
   /* Text */
   --text: #1a1a1a;
@@ -30,8 +30,8 @@
   --radius-md: 10px;
   --radius-lg: 16px;
 
-  --shadow-sm: 0 1px 2px rgba(26, 19, 0, 0.04);
-  --shadow-md: 0 6px 20px rgba(26, 19, 0, 0.06);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.06);
 
   /* Typography */
   --font-sans:
@@ -48,23 +48,28 @@
   --space-8: 48px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #14120d;
-    --surface: #1c1a14;
-    --surface-alt: #231f17;
-    --border: #2e2a21;
-    --border-strong: #3d382d;
+/* Dark palette is opt-in only — add `data-theme="dark"` to <html> to enable.
+   We intentionally do NOT honor `prefers-color-scheme` so the default stays
+   white regardless of OS setting. */
+[data-theme='dark'] {
+  --bg: #0f0f10;
+  --surface: #17171a;
+  --surface-alt: #1e1e21;
+  --border: #2a2a2e;
+  --border-strong: #3a3a3f;
 
-    --text: #f5f2ea;
-    --text-muted: #b5ae9e;
-    --text-subtle: #7d7565;
+  --text: #f4f4f5;
+  --text-muted: #a8a8ad;
+  --text-subtle: #6f6f75;
 
-    --brand-soft: #3a2d0d;
-    --brand-soft-border: #6b4f14;
-    --brand-fg: #fff4d6;
+  /* Red is brighter in dark mode so contrast holds up */
+  --brand: #ef4444;
+  --brand-hover: #dc2626;
+  --brand-active: #fca5a5;
+  --brand-soft: #3b0f10;
+  --brand-soft-border: #6b1a1c;
+  --brand-fg: #ffffff;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.5);
-  }
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.5);
 }

@@ -11,7 +11,10 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(morgan('dev'));
+// Silence request logs in the test runner — keeps test output readable.
+if (process.env.NODE_ENV !== 'test') {
+  app.use(morgan('dev'));
+}
 
 app.use('/api/health', healthRouter);
 app.use('/api/categories', categoriesRouter);
