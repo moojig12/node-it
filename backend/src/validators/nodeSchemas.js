@@ -14,3 +14,9 @@ export const updateNodeSchema = z.object({
     values: z.record(z.string(), z.unknown()).optional(),
   }),
 });
+
+export const reorderNodesSchema = z.object({
+  body: z.object({
+    nodeIds: z.array(z.string().min(1)).min(1),
+  }),
+});

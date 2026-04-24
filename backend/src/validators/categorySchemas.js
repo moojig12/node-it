@@ -12,6 +12,7 @@ export const createCategorySchema = z.object({
     name: z.string().min(1),
     description: z.string().optional(),
     fields: z.array(fieldSchema).default([]),
+    identityKeys: z.array(z.string().min(1)).default([]),
   }),
 });
 
@@ -20,5 +21,6 @@ export const updateCategorySchema = z.object({
     name: z.string().min(1).optional(),
     description: z.string().optional(),
     fields: z.array(fieldSchema).optional(),
+    identityKeys: z.array(z.string().min(1)).optional(),
   }),
 });
