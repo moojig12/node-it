@@ -1,11 +1,10 @@
 # Node It
 
-Node It is a structured note system for people who think in trees, not pages.
+Node It is a structured note system for people to make quick organized notes.
 
-Instead of fixed templates, you define categories and fields, then create connected
-nodes that can be edited inline and organized hierarchically.
+Instead of fixed templates, you define categories with fields and create notes with them!
 
-## What it does today
+## What it does
 
 - Custom categories with typed fields
 - Node trees with nested parent/child relationships
