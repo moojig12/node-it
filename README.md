@@ -1,121 +1,41 @@
-# Node It (Working Title)
+# Node It
 
-This project is a **node-based note system built for people who think in structure, not just pages**.
+Node It is a structured note system for people who think in trees, not pages.
 
-Instead of writing long, linear documents or forcing information into fixed templates, users build their own system of organization using **categories, fields, and connected nodes**. Each note becomes a small, structured unit of information that can stand alone—or live inside a larger hierarchy.
+Instead of fixed templates, you define categories and fields, then create connected
+nodes that can be edited inline and organized hierarchically.
 
-It’s closer to building a **personal information model** than taking traditional notes.
+## What it does today
 
----
+- Custom categories with typed fields
+- Node trees with nested parent/child relationships
+- Fast inline create/edit/delete workflows
+- Merge-on-duplicate behavior for identity-based entries
+- Subtree aggregation (sum / avg / count)
+- Drag-and-drop reorder and reparent
+- Keyboard navigation and shortcut support
 
-## What it feels like to use
+## Core concepts
 
-Quick input for notes with fields formatted by you in each category. Efficient noting and tracking of values
+- **Category**: your schema (field definitions + identity keys)
+- **Node**: a single structured entry under a category
+- **Tree**: nodes can contain other nodes to model layered thinking
 
-You:
+## Who it’s for
 
-- Define a **category** (like “Expenses”, “Ideas”, “Tasks”, “Research”)
-- Decide what each entry should contain (text, numbers, dates, currency, etc.)
-- Then start creating **nodes instantly**, filling them in as fast as you think
-- Adding notes with the same ID/Name will add up the configured value fields (entering [2x] [Bread] [5$] twice will result in [4x] [Bread] [5$] in the category for example)
+- People who prefer structured input over long-form docs
+- Users who want flexible organization without rigid app constraints
+- Builders tracking values, tasks, ideas, research, or inventory-like data
 
-Everything is editable in place. No navigation-heavy workflows. No constant page switching. Just structured input that stays out of your way.
+## Tech stack
 
----
+- Frontend: React (Vite)
+- Backend: Node.js + Express
+- Database: MongoDB
 
-## Core idea
+## Roadmap
 
-Every piece of information is a **node**.
+Current focus is UX polish and redesign (including canvas-based exploration),
+followed by backend hardening, auth/multi-tenancy, import/export, and operations.
 
-And every node belongs to a **system you define yourself**.
-
-So instead of forcing your thoughts into predefined apps, you build the structure that matches how your brain actually organizes things.
-
----
-
-## Key concepts
-
-### 🧩 Categories = Custom templates
-
-You define what a type of information *means*.
-
-Example:
-- “Expense” → amount, category, date
-- “Idea” → title, description, priority
-- “Task” → name, status, due date
-
----
-
-### 🧠 Nodes = Structured thoughts
-
-Each entry follows its category, but remains flexible and editable.
-
-Nodes can also contain other nodes, forming natural hierarchies:
-
-- project
-  - category
-    - categories
-      - notes
-
----
-
-### 🌳 Hierarchy = Thinking in layers
-
-Instead of flat lists, everything can branch and expand.
-
-You can collapse complexity when you don’t need it, or dive deep when you do.
-
----
-
-### ⚡ Fast input = core experience
-
-This system is built for speed:
-
-- Click → type → enter → done  
-- No page changes  
-- No friction between thought and storage  
-
----
-
-## What makes it different
-
-Most tools force you into their structure.
-
-This one does the opposite.
-
-You define:
-- what data looks like
-- how it behaves
-- how it’s organized
-
-The system simply executes it cleanly.
-
-It behaves like a **lightweight personal database builder**, but with a UI designed for thinking—not engineering.
-
----
-
-## Who this is for
-
-This is ideal for people who:
-
-- Think in systems, not lists
-- Want a simple yet versatile noting app
-- Prefer structure but dislike rigid tools
-- Want something between Notion, Airtable, and graph editors
-- People making procuring products who want to save time
-- Build mental models instead of just storing notes
-
----
-
-## Tech foundation
-
-- **Frontend:** React  
-- **Backend:** Node.js + Express  
-- **Database:** MongoDB (schema-flexible storage)  
-- Designed with extensibility from the start  
-
----
-
-## Summary
-
-A **personal node-based information system** for structuring thoughts like a lightweight database—built to stay fast, flexible, and intuitive instead of technical or restrictive.
+See full plan: [`ROADMAP.md`](./ROADMAP.md)
