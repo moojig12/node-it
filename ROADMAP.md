@@ -111,7 +111,16 @@ Legend: `[x]` done · `[ ]` pending · `[~]` partial / in progress
 - [ ] Cross-category links (a node references another node)
 - [ ] Saved views (filter + sort + column config) per category
 - [ ] Plugin hooks: pre-save / post-save for custom field validation or derived values
-- [ ] Mobile client (React Native or PWA push)
+- [ ] Mobile client (React Native)
+  - [ ] IOS support
+  - [ ] Android support
+- [ ] Co-working on canvas (Websockets)
+- [ ] PoS system
+  - [ ] PoS mode-view
+    - [ ] Payment handling
+	- [ ] Quick inventory management
+  - [ ] Integration with payment hardware
+- [ ] Software client
 
 ## Phase 8 — Ops & release
 
@@ -138,5 +147,4 @@ Legend: `[x]` done · `[ ]` pending · `[~]` partial / in progress
 ## How to contribute to this roadmap
 
 Open a PR editing this file. Add to the phase that fits, or propose a new phase.
-Keep items small enough that "done" is obvious. If something keeps sliding,
-demote it — roadmap entropy is a feature, not a bug.
+Keep items small enough that "done" is obvious.
