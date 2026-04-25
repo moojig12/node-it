@@ -49,11 +49,24 @@ Legend: `[x]` done · `[ ]` pending · `[~]` partial / in progress
 - [x] Loading / empty / error states per view
 - [x] Keyboard navigation in the tree (arrows, enter, shift-enter, del, esc)
 
-## Phase 3 — Polish & UX
+## Phase 3 — Redesign, Polish & UX
 
-- [ ] Breadcrumbs from `ancestors[]`
+- [ ] Redesign the layouts
+  - [ ] Change the identifier marker to a selection field in the category settings
+  - [ ] Implement Canvas view
+    - [ ] Categories will be displayed as dots
+	- [ ] Right clicking a dot will select it
+	  - [ ] Selection options will be a bar at the bottom of the canvas board
+	- [ ] Nodes connected to other nodes will be displayed
+  - [ ] To edit a category, right click on the category in the category viewer and it will open a popup field to edit the category settings
+    - [ ] Additionally the popup can be opened by selection in the canvas viewer
+  - [ ] Move category viewer to left side and polish UI/UX
+    - [ ] Left-click will open a categories contents and show the values
+- [ ] Enable Full-control with keyboard -> More efficient for users
+  - [ ] Keyboard controls in canvas view
 - [ ] Search within a category (indexed text fields)
 - [ ] Sort options beyond `order` (by any field, asc/desc)
+- [ ] Breadcrumbs from `ancestors[]`
 - [ ] Filter bar per field type (range for number/currency/date, contains for text)
 - [ ] Undo last destructive op (soft queue, N seconds)
 - [ ] Dark mode + theme persistence
@@ -75,6 +88,7 @@ Legend: `[x]` done · `[ ]` pending · `[~]` partial / in progress
 ## Phase 5 — Auth & multi-tenancy
 
 - [ ] User model + email/password auth (bcrypt)
+- [ ] Implement OAuth 2.0
 - [ ] JWT session middleware
 - [ ] `ownerId` on categories; scope all queries by owner
 - [ ] Shareable read-only links (signed URL) per subtree
