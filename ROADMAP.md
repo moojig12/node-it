@@ -49,6 +49,29 @@ Legend: `[x]` done · `[ ]` pending · `[~]` partial / in progress
 - [x] Loading / empty / error states per view
 - [x] Keyboard navigation in the tree (arrows, enter, shift-enter, del, esc)
 
+## Phase 2.5 — Next.js migration
+
+Move the Vite + React Router frontend onto Next.js (App Router) and fold the
+Express API into Next route handlers. Goal: server-rendered first paint for
+the canvas/tree, one runtime instead of two, and a cleaner deploy story.
+
+- [ ] Scaffold Next.js app at `web/` (App Router, JS to match the rest of the repo)
+- [ ] Dockerfile.dev for the web service (mirrors `frontend/`)
+- [ ] Wire `web` into `docker-compose.yml` alongside existing `frontend`
+- [ ] Port shared design tokens (`tokens.css`) and base styles into `web/app/globals.css`
+- [ ] Move axios API client from `frontend/src/services/api.js` to `web/lib/api.js`
+- [ ] Port pages: `/` (Home), `/categories`, `/categories/:id`
+  - [ ] Server component shells with `'use client'` boundaries for interactive bits
+- [ ] Port components: `Layout`, `Toasts`, `category/*`, `tree/*`
+- [ ] Move backend logic into `web/app/api/` route handlers
+  - [ ] `app/api/health/route.js`
+  - [ ] `app/api/categories/[...]/route.js`
+  - [ ] `app/api/nodes/[...]/route.js`
+  - [ ] Mongoose connection helper for Next runtime (cached across hot reloads)
+- [ ] Port backend tests to run against route handlers (or keep services pure and re-use them)
+- [ ] Flip Caddy: route `/` to the new `web` service, retire the `backend` and old `frontend` services
+- [ ] Delete `frontend/` and `backend/` once parity is reached
+
 ## Phase 3 — Redesign, Polish & UX
 
 - [ ] Redesign the layouts
