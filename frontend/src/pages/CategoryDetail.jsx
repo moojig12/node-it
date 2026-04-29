@@ -1,64 +1,32 @@
-import { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Categories, readApiError } from '../services/api.js';
 import { useTree } from '../hooks/useTree.js';
 import { useToasts } from '../hooks/useToasts.js';
+import { useCategoryList } from '../hooks/useCategoryList.js';
+import { useCategoryEdit } from '../hooks/useCategoryEdit.js';
 import TreeView from '../components/tree/TreeView.jsx';
 import CategoryAggregate from '../components/tree/CategoryAggregate.jsx';
-import CategoryForm from '../components/category/CategoryForm.jsx';
 
+/**
+ * Detail page for a single category — full tree + aggregate strip. Schema
+ * editing is no longer inline; "Edit schema" opens the popup instead.
+ *
+ * Reads the category itself out of the shared rail list so saves from the
+ * modal flow back here automatically (refreshList in the modal updates
+ * the context, which re-renders this page).
+ */
 function CategoryDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const toasts = useToasts();
-  const [category, setCategory] = useState(null);
-  const [loadError, setLoadError] = useState(null);
-  const [editing, setEditing] = useState(false);
-  const [saving, setSaving] = useState(false);
+  const { list, error: listError, refresh: refreshList } = useCategoryList();
+  const editModal = useCategoryEdit();
 
   const tree = useTree(id);
+  const category = list?.find((c) => c._id === id) ?? null;
 
-  const refreshCategory = async () => {
-    try {
-      setCategory(await Categories.get(id));
-    } catch (err) {
-      setLoadError(readApiError(err, 'Failed to load category'));
-    }
-  };
-
-  useEffect(() => {
-    let cancelled = false;
-    Categories.get(id)
-      .then((data) => {
-        if (!cancelled) {
-          setCategory(data);
-          setLoadError(null);
-        }
-      })
-      .catch((err) => {
-        if (!cancelled)
-          setLoadError(readApiError(err, 'Failed to load category'));
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [id]);
-
-  const handleSaveCategory = async (payload) => {
-    setSaving(true);
-    try {
-      await Categories.update(id, payload);
-      toasts.success('Category updated');
-      setEditing(false);
-      refreshCategory();
-    } catch (err) {
-      toasts.error(readApiError(err, 'Update failed'));
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const handleDeleteCategory = async () => {
+  const handleDelete = async () => {
+    if (!category) return;
     if (
       !window.confirm(
         `Delete category "${category.name}"?\n\nThis will remove all nodes if you confirm cascade.`,
@@ -68,7 +36,8 @@ function CategoryDetail() {
     try {
       await Categories.remove(id);
       toasts.success('Category deleted');
-      navigate('/categories');
+      refreshList();
+      navigate('/');
     } catch (err) {
       if (err.response?.status === 409) {
         const count = err.response.data?.error?.match(/(\d+)/)?.[1] ?? 'some';
@@ -76,7 +45,8 @@ function CategoryDetail() {
           try {
             await Categories.remove(id, { force: true });
             toasts.success('Category and nodes deleted');
-            navigate('/categories');
+            refreshList();
+            navigate('/');
           } catch (err2) {
             toasts.error(readApiError(err2, 'Cascade delete failed'));
           }
@@ -87,7 +57,10 @@ function CategoryDetail() {
     }
   };
 
-  if (loadError) return <div className="error-text">{loadError}</div>;
+  if (listError) return <div className="error-text">{listError}</div>;
+  if (list && !category) {
+    return <div className="error-text">Category not found.</div>;
+  }
   if (!category) return <div className="loading">Loading category…</div>;
 
   return (
@@ -95,7 +68,7 @@ function CategoryDetail() {
       <div className="page-header">
         <div>
           <p className="muted" style={{ marginBottom: 4 }}>
-            <Link to="/categories">← All categories</Link>
+            <Link to="/">← Canvas</Link>
           </p>
           <h1>{category.name}</h1>
           {category.description && <p>{category.description}</p>}
@@ -107,28 +80,12 @@ function CategoryDetail() {
           </p>
         </div>
         <div className="header-actions">
-          {!editing && (
-            <>
-              <button onClick={() => setEditing(true)}>Edit schema</button>
-              <button className="btn-danger" onClick={handleDeleteCategory}>
-                Delete
-              </button>
-            </>
-          )}
+          <button onClick={() => editModal.open(category)}>Edit schema</button>
+          <button className="btn-danger" onClick={handleDelete}>
+            Delete
+          </button>
         </div>
       </div>
-
-      {editing && (
-        <div style={{ marginBottom: 24 }}>
-          <CategoryForm
-            initial={category}
-            submitLabel="Save changes"
-            busy={saving}
-            onSave={handleSaveCategory}
-            onCancel={() => setEditing(false)}
-          />
-        </div>
-      )}
 
       <CategoryAggregate category={category} tree={tree} />
 

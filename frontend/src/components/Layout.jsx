@@ -1,26 +1,30 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import Toasts from './Toasts.jsx';
+import CategoryRail from './CategoryRail.jsx';
+import { CategoryListProvider } from '../hooks/CategoryListProvider.jsx';
+import { CategoryEditProvider } from '../hooks/CategoryEditProvider.jsx';
 
 function Layout() {
   return (
-    <div className="app-shell">
-      <header className="app-header">
-        <NavLink to="/" className="app-brand" end>
-          <span className="brand-dot" aria-hidden="true" />
-          <span>Node It</span>
-        </NavLink>
-        <nav className="app-nav">
-          <NavLink to="/" end>
-            Home
-          </NavLink>
-          <NavLink to="/categories">Categories</NavLink>
-        </nav>
-      </header>
-      <main className="app-main">
-        <Outlet />
-      </main>
-      <Toasts />
-    </div>
+    <CategoryListProvider>
+      <CategoryEditProvider>
+        <div className="app-shell">
+          <header className="app-header">
+            <NavLink to="/" className="app-brand" end>
+              <span className="brand-dot" aria-hidden="true" />
+              <span>Node It</span>
+            </NavLink>
+          </header>
+          <div className="app-body">
+            <CategoryRail />
+            <main className="app-main">
+              <Outlet />
+            </main>
+          </div>
+          <Toasts />
+        </div>
+      </CategoryEditProvider>
+    </CategoryListProvider>
   );
 }
 
