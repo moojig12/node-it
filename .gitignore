@@ -5,3 +5,4 @@ frontend/.next
 backend/dist
 .DS_Store
 npm-debug.log*
+/.claude

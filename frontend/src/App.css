@@ -537,12 +537,17 @@
 
 .field-row {
   display: grid;
-  grid-template-columns: 1.5fr 1.5fr 1fr 1fr 44px;
   gap: var(--space-2);
   align-items: center;
 }
+
+.field-row input,
+.field-row select {
+  width: 50%;
+}
 .field-row-header {
   font-size: 12px;
+  min-width: 0;
   color: var(--text-subtle);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -790,13 +795,18 @@
 }
 
 /* -------- Small helpers -------- */
-.stack-sm { display: flex; flex-direction: column; gap: var(--space-2); }
-.stack-md { display: flex; flex-direction: column; gap: var(--space-4); }
+.stack-sm { display: grid; grid-auto-flow: dense; gap: var(--space-2); }
+.stack-md { display: grid; grid-auto-flow: dense; gap: var(--space-4); }
 .muted { color: var(--text-muted); }
 .error-text { color: var(--danger); font-size: 13px; }
 .loading { color: var(--text-muted); padding: var(--space-4); }
 
 /* -------- Modal (category edit popup) -------- */
+.stack-fieldset {
+  display: grid;
+  grid-auto-flow: dense;
+}
+
 .modal-backdrop {
   position: fixed;
   inset: 0;

@@ -67,7 +67,7 @@ function CategoryForm({ initial, onSave, onCancel, busy, submitLabel = 'Save' })
         </div>
       </div>
 
-      <div>
+      <div className="stack-fieldset">
         <h3 style={{ marginBottom: 8 }}>Fields</h3>
         <p className="card-subtle" style={{ marginBottom: 12 }}>
           Fields define the shape of each node. Mark one or more as{' '}

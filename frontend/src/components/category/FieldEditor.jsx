@@ -48,13 +48,13 @@ function FieldEditor({ fields, identityKeys, onFieldsChange, onIdentityChange })
 
   return (
     <div className="stack-sm">
-      <div className="field-row field-row-header">
+      {/* <div className="field-row field-row-header">
         <span>Key</span>
         <span>Label</span>
         <span>Type</span>
         <span>Aggregate</span>
         <span />
-      </div>
+      </div> */}
 
       {fields.length === 0 && (
         <div className="muted">No fields yet — add at least one.</div>
@@ -66,27 +66,34 @@ function FieldEditor({ fields, identityKeys, onFieldsChange, onIdentityChange })
         return (
           <div key={idx} className="stack-sm">
             <div className="field-row">
+			<div className="field-row-header">Key</div>
               <input
                 value={field.key}
                 placeholder="e.g. name"
                 onChange={(e) => updateField(idx, { key: e.target.value })}
               />
-              <input
+			  <div className="field-row-header">Label</div>
+              <input 
                 value={field.label}
                 placeholder="Display label"
                 onChange={(e) => updateField(idx, { label: e.target.value })}
               />
+			  <div className="field-row-header">Type</div>
               <select
+				
                 value={field.type}
                 onChange={(e) => updateField(idx, { type: e.target.value })}
               >
+				
                 {FIELD_TYPES.map((t) => (
                   <option key={t} value={t}>
                     {t}
                   </option>
                 ))}
               </select>
+			  <div className="field-row-header">Aggregate</div>
               <select
+			 	
                 value={field.aggregate ?? ''}
                 onChange={(e) =>
                   updateField(idx, { aggregate: e.target.value || null })
