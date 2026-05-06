@@ -4,30 +4,13 @@
   height: 100vh;
 }
 
-.app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-3) var(--space-5);
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-  flex-shrink: 0;
-}
-
-.app-brand {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.app-brand .brand-dot {
+.brand-dot {
   width: 12px;
   height: 12px;
   border-radius: 3px;
   background: var(--brand);
   box-shadow: 0 0 0 3px var(--brand-soft);
+  flex-shrink: 0;
 }
 
 /* New 2-column body: left rail | main content (canvas or page). */
@@ -64,12 +47,40 @@
   margin-right: 0;
 }
 
-/* -------- Left rail -------- */
+/* -------- Left rail --------
+   Two stacked sections inside the aside:
+   - .rail-brand:   pinned at top, owns the separator line
+   - .rail-content: scrolls independently, holds the categories list */
 .cat-rail {
   width: 280px;
   flex-shrink: 0;
   border-right: 1px solid var(--border);
   background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.rail-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: inherit;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.rail-brand:hover {
+  background: var(--surface-alt);
+  text-decoration: none;
+}
+
+.rail-content {
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   padding: var(--space-3);
   display: flex;
