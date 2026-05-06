@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Categories, readApiError } from '../services/api.js';
 import { useCategoryList } from '../hooks/useCategoryList.js';
 import { useCategoryEdit } from '../hooks/useCategoryEdit.js';
@@ -8,9 +8,14 @@ import CategoryForm from './category/CategoryForm.jsx';
 import CategoryRailNodes from './CategoryRailNodes.jsx';
 
 /**
- * Always-visible left rail. Each row is a drop-down: click the chevron (or
- * the row body) to expand and see the category's nodes. The pencil icon
- * opens the edit popup; clicking the name navigates to the full tree page.
+ * Always-visible left rail.
+ *
+ * Structure:
+ *   .cat-rail
+ *     .rail-brand       ← brand mark, owns the separator below
+ *     .rail-content     ← scrollable: header (label + new), create form, list
+ *
+ * Each list row is a drop-down: chevron / name / edit pencil / delete.
  */
 function CategoryRail() {
   const { list, error, refresh } = useCategoryList();
@@ -75,41 +80,47 @@ function CategoryRail() {
 
   return (
     <aside className="cat-rail" aria-label="Categories">
-      <div className="rail-header">
-        <h2>Categories</h2>
-        {!creating && (
-          <button
-            type="button"
-            className="btn-ghost rail-add"
-            onClick={() => setCreating(true)}
-            aria-label="New category"
-          >
-            + New
-          </button>
-        )}
-      </div>
+      <NavLink to="/" className="rail-brand" end>
+        <span className="brand-dot" aria-hidden="true" />
+        <span>Node It</span>
+      </NavLink>
 
-      {creating && (
-        <div className="rail-create">
-          <CategoryForm
-            submitLabel="Create"
-            busy={busy}
-            onSave={handleCreate}
-            onCancel={() => setCreating(false)}
-          />
+      <div className="rail-content">
+        <div className="rail-header">
+          <h2>Categories</h2>
+          {!creating && (
+            <button
+              type="button"
+              className="btn-ghost rail-add"
+              onClick={() => setCreating(true)}
+              aria-label="New category"
+            >
+              + New
+            </button>
+          )}
         </div>
-      )}
 
-      {error && <div className="error-text rail-error">{error}</div>}
-      {list === null && !error && (
-        <div className="rail-nodes-state muted">Loading…</div>
-      )}
-      {list && list.length === 0 && !creating && (
-        <div className="rail-nodes-state muted">No categories yet.</div>
-      )}
+        {creating && (
+          <div className="rail-create">
+            <CategoryForm
+              submitLabel="Create"
+              busy={busy}
+              onSave={handleCreate}
+              onCancel={() => setCreating(false)}
+            />
+          </div>
+        )}
 
-      {list && list.length > 0 && (
-        <ul className="rail-list" role="tree">
+        {error && <div className="error-text rail-error">{error}</div>}
+        {list === null && !error && (
+          <div className="rail-nodes-state muted">Loading…</div>
+        )}
+        {list && list.length === 0 && !creating && (
+          <div className="rail-nodes-state muted">No categories yet.</div>
+        )}
+
+        {list && list.length > 0 && (
+          <ul className="rail-list" role="tree">
           {list.map((cat) => {
             const isExpanded = expanded.has(cat._id);
             return (
@@ -167,8 +178,9 @@ function CategoryRail() {
               </li>
             );
           })}
-        </ul>
-      )}
+          </ul>
+        )}
+      </div>
     </aside>
   );
 }
