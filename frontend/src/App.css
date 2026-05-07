@@ -573,6 +573,199 @@
   border: 1px solid var(--brand-soft-border);
 }
 
+/* -------- Field editor (category schema) --------
+   Two zones:
+   - .field-list:  one compact row per committed field (.field-list-item)
+   - .field-draft: the always-visible "next field to add" form
+   Inline editing of a committed row swaps it into .field-list-item.editing,
+   which uses the same .field-inputs grid the draft uses. */
+.field-editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.field-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.field-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.field-list-item.editing {
+  flex-direction: column;
+  align-items: stretch;
+  background: var(--surface-alt);
+  padding: var(--space-3);
+  gap: var(--space-3);
+}
+
+.field-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+}
+.fs-key {
+  font-weight: 600;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+.fs-sep {
+  color: var(--text-subtle);
+}
+.fs-label {
+  color: var(--text);
+}
+.fs-type {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.fs-agg {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--brand-soft);
+  color: var(--brand-active);
+  border: 1px solid var(--brand-soft-border);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.field-row-actions {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-shrink: 0;
+}
+.field-list-item.editing .field-row-actions {
+  justify-content: flex-end;
+}
+
+.field-icon-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.field-icon-btn:hover {
+  background: var(--surface-alt);
+  color: var(--text);
+}
+.field-icon-btn.field-icon-danger:hover {
+  color: var(--danger);
+  background: rgba(192, 57, 43, 0.08);
+}
+
+.field-empty {
+  font-size: 13px;
+  padding: var(--space-3);
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+}
+
+/* The 4-input grid shared by both inline-edit and draft. min-width: 0 lets
+   inputs shrink inside the grid track instead of forcing horizontal scroll. */
+.field-inputs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+.field-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+.field-input-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.field-input-group input,
+.field-input-group select {
+  width: 100%;
+  min-width: 0;
+}
+
+.field-draft {
+  background: var(--surface-alt);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.field-draft-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.field-draft-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.field-identity-check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+  width: max-content;
+}
+.field-identity-check input {
+  margin: 0;
+}
+
+.field-draft-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
 /* -------- Category list -------- */
 .cat-list {
   display: grid;
